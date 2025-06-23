@@ -1,27 +1,78 @@
+# ⚽ Análisis Histórico de Partidos Internacionales
 
-This project contains an exploratory data analysis (EDA) of national soccer teams using `app.py`. The analysis explores team statistics, player data, and match outcomes to uncover insights and trends.
+Aplicación web interactiva creada con **Streamlit** que permite visualizar, filtrar y analizar resultados de selecciones nacionales de fútbol a lo largo de la historia.
 
-## Features
+---
 
-- Data cleaning and preprocessing
-- Visualization of team and player statistics
-- Analysis of match results and performance metrics
+## 🌟 Funcionalidades principales
 
-## Requirements
+- Visualización de partidos por país
+- Análisis de resultados: ganados, empatados y perdidos
+- Gráficos de torta, barras e histogramas por país
+- Mapa mundial con resultados por país
+- Comparación de rendimiento como **local vs visitante**
+- Filtro por tipo de resultado y año
 
-- Python 3.x
-- pandas
-- matplotlib
-- seaborn
+---
 
-## Usage
+## 📷 Capturas de pantalla
 
-1. Clone the repository.
-2. Install dependencies:  
-    `pip install -r requirements.txt`
-3. Run the app:  
-    `python app.py`
+### Página principal:
+![Captura página principal](images/screenshot1.png)
 
-## License
+### Análisis por Países:
+![Captura Análisis](images/screenshot2.png)
 
-This project is licensed under the MIT License.
+### Comparación Local vs Visitante:
+![Captura local vs visitante](images/screenshot3.png)
+
+---
+
+## 🔧 Tecnologías utilizadas
+
+- [Streamlit](https://streamlit.io/)
+- [Pandas](https://pandas.pydata.org/)
+- [Plotly](https://plotly.com/)
+- [NumPy](https://numpy.org/)
+- [Seaborn](https://seaborn.pydata.org/)
+
+---
+
+## 🚀 Cómo correr el proyecto localmente
+
+1. Cloná el repositorio:
+
+   ```bash
+   git clone https://github.com/alejotrenti/football-national-analysis.git
+   cd football-national-analysis
+   ```
+
+2. Instalá las dependencias:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Ejecutá la app:
+
+   ```bash
+   streamlit run app.py
+   ```
+
+---
+
+## 🌐 App desplegada
+
+📲 Podés probar la app en vivo desde este enlace:
+
+👉 [https://football-national-analysis-bzygbrevqxzsavtjuappanw.streamlit.app/](https://football-national-analysis-bzygbrevqxzsavtjuappanw.streamlit.app/)
+
+---
+
+## 🧠 Sobre el proyecto
+
+Este proyecto fue creado como parte de mi aprendizaje de **Streamlit** y visualización de datos. El dataset incluye todos los partidos internacionales desde 1872. Sirve como base para análisis de rendimiento, tendencias históricas y comparaciones entre selecciones.
+
+---
+
+

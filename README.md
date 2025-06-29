@@ -1,4 +1,6 @@
 # ⚽ Análisis Histórico de Partidos Internacionales
+![Imagen fútbol](images/futbol.jpg)
+
 
 Aplicación web interactiva creada con **Streamlit** que permite visualizar, filtrar y analizar resultados de selecciones nacionales de fútbol a lo largo de la historia.
 
@@ -8,8 +10,7 @@ Aplicación web interactiva creada con **Streamlit** que permite visualizar, fil
 
 - Visualización de partidos por país
 - Análisis de resultados: ganados, empatados y perdidos
-- Gráficos de torta, barras e histogramas por país
-- Mapa mundial con resultados por país
+- Mapas y gráficos de torta, barras e histogramas por país
 - Comparación de rendimiento como **local vs visitante**
 - Filtro por tipo de resultado y año
 

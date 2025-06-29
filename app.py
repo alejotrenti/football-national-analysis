@@ -53,9 +53,14 @@ def main():
     #Side bar
 
     st.sidebar.header("🏆 Navegación rápida")
-    seccion = st.sidebar.radio("Ir a la sección:", ["Inicio", "Análisis por Países", "Local y visitante"])
+    seccion = st.sidebar.radio("Ir a la sección:", ["Inicio", "Análisis por Países", "Local y visitante", "Gráficos, Mapas y más"])
 
     if seccion == "Inicio":
+        columna1, columna2 = st.columns(2)
+        with columna1:
+            st.image('images/futbol.jpg', width=1000, use_container_width=True)
+        with columna2:
+            st.image('images/futbol2.jpg', width=1000, use_container_width=True)
         st.subheader("🏁 Bienvenido")
         st.write("Explorá datos de partidos entre selecciones nacionales.")
         st.dataframe(df.head(10))
@@ -67,7 +72,6 @@ def main():
         st.subheader("🌎 Análisis por países")
         st.write("En este apartado, según el pais elégido, muestra 5 de sus últimos partidos.")
         
-        st.sidebar.subheader("Por países")
         paises = ["-- Selecciona un país --"] + list(sorted(df["country"].unique()))
         
         pais = st.selectbox(
@@ -79,16 +83,6 @@ def main():
             df_paises_elegidos = df[df["country"] == pais].copy()
             
             st.write(df_paises_elegidos.sort_values(by='date', ascending=False).head(5))
-            
-            # filtro_ganados = (df_paises_elegidos['home_team'] == pais) & (df_paises_elegidos['home_score'] > df_paises_elegidos['away_score']) | (df_paises_elegidos['away_team'] == pais) &(df_paises_elegidos['home_score'] < df_paises_elegidos['away_score'])
-            # ganados = len(df_paises_elegidos[filtro_ganados])
-                
-            # filtro_empatados = (df_paises_elegidos['home_score'] == df_paises_elegidos['away_score'])
-            # empatados = len(df_paises_elegidos[filtro_empatados])
-            
-            # filtro_perdidos = (df_paises_elegidos['home_team'] == pais) & (df_paises_elegidos['home_score'] < df_paises_elegidos['away_score']) | (df_paises_elegidos['away_team'] == pais) &(df_paises_elegidos['home_score'] > df_paises_elegidos['away_score'])
-            # perdidos = len(df_paises_elegidos[filtro_perdidos])
-            
 
             # Asignamos el resultado directamente en una sola columna
             df_paises_elegidos['Resultado'] = np.select(
@@ -223,8 +217,45 @@ def main():
         else:
             st.warning("Selecciona un país para ver los resultados.")
 
+############ APARTADO PARA GRÁFICOS y MAPAS
+        
+    elif seccion == 'Gráficos, Mapas y más':
+        st.subheader("📌 Mapa mundial de partidos jugados por país")
+        st.write("Visualizá la cantidad total de partidos jugados por cada país en el mapa. Solo se consideran países que hayan jugado al menos un partido internacional.")
 
+        partidos_local = df.groupby('home_team').size()
+        partidos_visitante = df.groupby('away_team').size()
 
+        partidos_total = partidos_local.add(partidos_visitante, fill_value=0).reset_index()
+        partidos_total.columns = ['country', 'total_matches']
+
+        fig_map = px.choropleth(
+            partidos_total,
+            locations='country',
+            locationmode='country names',
+            color='total_matches',
+            color_continuous_scale='greens',
+            title="🌍 Total de partidos jugados por país",
+        )
+        fig_map.update_layout(margin={"r":0,"t":50,"l":0,"b":0})
+        st.plotly_chart(fig_map, use_container_width=True)
+
+        st.markdown("---")
+        st.subheader("📅 Distribución de partidos a lo largo del tiempo")
+        st.write("Este gráfico muestra cómo han evolucionado los partidos internacionales año a año.")
+
+        df['año'] = df['date'].dt.year
+        partidos_por_año = df.groupby('año').size().reset_index(name='cantidad')
+
+        fig_line = px.line(
+            partidos_por_año,
+            x='año',
+            y='cantidad',
+            markers=True,
+            title='📈 Evolución histórica de partidos internacionales por año',
+        )
+        fig_line.update_layout(xaxis_title='Año', yaxis_title='Cantidad de partidos')
+        st.plotly_chart(fig_line, use_container_width=True)
 
 
 if __name__ == '__main__':
